@@ -10,9 +10,19 @@
   },
   "devDependencies": {
     "aws-sdk": "^2.782.0",
+    "serverless": "^2.8.0",
     "serverless-dynamodb-local": "^0.2.39",
     "serverless-offline": "^6.8.0",
     "serverless-plugin-tables": "^1.0.2",
     "serverless-pseudo-parameters": "^2.5.0"
+  },
+  "scripts": {
+    "serverless": "serverless",
+    "additional": "cp node_modules dist/node_modules -R && cp serverless.yaml dist/serverless.yaml",
+    "archive": "(rm -rf temp-app.zip && zip -r temp-app.zip layers node_modules todos .gitignore package.json package-lock.json README.md serverless.yml)",
+    "build": "npm install && cp -r node_modules layers/dependencies/nodejs && cd layers/dependencies && zip -r nodejs.zip nodejs/",
+    "deploy": "serverless deploy",
+    "package": "npm run-script archive && mv temp-app.zip ",
+    "test": ""
   }
 }

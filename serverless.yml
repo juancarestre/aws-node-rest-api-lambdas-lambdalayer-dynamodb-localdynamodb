@@ -27,7 +27,7 @@ provider:
   name: aws
   runtime: nodejs12.x
   region: us-east-1
-  profile: juan
+  # profile: juan
   environment:
     DYNAMODB_TABLE: ${self:service}-${opt:stage, self:provider.stage}
   iamRoleStatementsName: role-serverless-offline-test-lambda

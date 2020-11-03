@@ -52,7 +52,7 @@ You can create, retrieve, update, or delete todos with the following commands:
 ### Create a Todo
 
 ```bash
-curl -X POST -H "Content-Type:application/json" http://localhost:3000/todos --data '{ "text": "Learn Serverless" }'
+curl -X POST -H "Content-Type:application/json" http://localhost:3000/dev/todos --data '{ "text": "Learn Serverless" }'
 ```
 
 Example Result:
@@ -63,7 +63,7 @@ Example Result:
 ### List all Todos
 
 ```bash
-curl -H "Content-Type:application/json" http://localhost:3000/todos
+curl -H "Content-Type:application/json" http://localhost:3000/dev/todos
 ```
 
 Example output:
@@ -75,7 +75,7 @@ Example output:
 
 ```bash
 # Replace the <id> part with a real id from your todos table
-curl -H "Content-Type:application/json" http://localhost:3000/todos/<id>
+curl -H "Content-Type:application/json" http://localhost:3000/dev/todos/<id>
 ```
 
 Example Result:
@@ -87,7 +87,7 @@ Example Result:
 
 ```bash
 # Replace the <id> part with a real id from your todos table
-curl -X PUT -H "Content-Type:application/json" http://localhost:3000/todos/<id> --data '{ "text": "Learn Serverless", "checked": true }'
+curl -X PUT -H "Content-Type:application/json" http://localhost:3000/dev/todos/<id> --data '{ "text": "Learn Serverless", "checked": true }'
 ```
 
 Example Result:
@@ -99,7 +99,7 @@ Example Result:
 
 ```bash
 # Replace the <id> part with a real id from your todos table
-curl -X DELETE -H "Content-Type:application/json" http://localhost:3000/todos/<id>
+curl -X DELETE -H "Content-Type:application/json" http://localhost:3000/dev/todos/<id>
 ```
 
 No output
