@@ -1,4 +1,4 @@
-service: apidynamolocal
+service: ${self:custom.pOwner}-api-sample
 
 frameworkVersion: ">=1.1.0 <=2.8.0"
 
@@ -22,12 +22,54 @@ custom:
       migrate: true
     migration:
       dir: offline/migrations
+  #-----------------------------------------------------------------------------
+  # Mapping with respect to environment specific URL and serverless stage.
+  #-----------------------------------------------------------------------------
+  # AWS account Id Map that would be used as a map for forming urns.
+  # dev-account-id: 329400689xxx
+  dev-region: us-east-1
+
+  # #  Owner or service name. Example of owner is rti which standards for
+  # #  real time inventory.  Ensure that the owner name is kept within 6 letters as
+  # #  it will be used in tagging and naming of various resources.
+  pOwner: dsre
+
+  # #  Name of the vertical to which this app belongs to.  Example of vertical
+  # #  would be dfa (Dealer Field and Affiliates), cto (Consumer Portals) etc. Used
+  # #  to identify who is responsible for the resource.
+  # pVertical: col
+
+  # pAccountId: ${self:custom.${self:custom.pEnvironment}-account-id}
+
+  # # [dev, prod]
+  pEnvironment: ${opt:stage, self:provider.stage, 'dev'}
+
+  pRegion: ${self:custom.${self:custom.pEnvironment}-region}
+
+  # # Log Level - can be any of 'trace', 'debug', 'info', 'warn', 'error'
+  # pLogLevel: ${self:custom.${self:custom.pEnvironment}-log-level}
+
+  # # Auth Domain URL
+  # pAuthDomain: ${self:custom.${self:custom.pEnvironment}-auth-domain}
+
+  # # Auth STS Domain URL
+  # pAuthStsDomain: ${self:custom.${self:custom.pEnvironment}-auth-sts-domain}
+
+  # # Auth Valid Tenants
+  # pAuthValidTenants: ${self:custom.${self:custom.pEnvironment}-auth-valid-tenants}
+
+  # # Auth Key Extension
+  # pAuthKeysExtension: ${self:custom.${self:custom.pEnvironment}-auth-keys-extension}
+  
+  # #Authorized Client AppId
+  # pAuthClientAppid: ${self:custom.${self:custom.pEnvironment}-client-appid}
+
 
 provider:
   name: aws
   runtime: nodejs12.x
-  region: us-east-1
-  # profile: juan
+  region: ${self:custom.pRegion}
+  profile: juan
   environment:
     DYNAMODB_TABLE: ${self:service}-${opt:stage, self:provider.stage}
   iamRoleStatementsName: role-serverless-offline-test-lambda
